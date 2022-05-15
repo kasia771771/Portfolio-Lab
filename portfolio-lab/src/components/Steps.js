@@ -1,6 +1,6 @@
 import React from 'react'
 import {Link} from "react-router-dom";
-
+export const steps = document.getElementById('steps');
 
 export default function Steps() {
     return (

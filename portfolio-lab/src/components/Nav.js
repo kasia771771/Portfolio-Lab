@@ -1,8 +1,18 @@
-import React from 'react'
+import React, {useRef} from 'react'
 import {Link as ScrollLink} from 'react-scroll';
-import {Link, NavLink} from 'react-router-dom';
+import {Link, NavLink, useLocation, useNavigate} from 'react-router-dom';
 
 export default function Nav() {
+
+  const location = useLocation();
+  const navigate = useNavigate();
+
+
+const handleScroll = () => {
+  if(location.pathname !== '/'){
+    navigate('/');
+  } 
+}
 
   return (
     <div className='nav-wrapper container'>
@@ -19,6 +29,7 @@ export default function Nav() {
           <Link 
             to='rejestracja'
             className='sign-up-btn'
+            
           >
             Załóż konto
           </Link>
@@ -29,6 +40,7 @@ export default function Nav() {
           <NavLink
             to='/'
             className={({isActive}) => (isActive ? 'active' : 'nav-bottom-element-link')}
+            
           >
             Start
           </NavLink>
@@ -43,6 +55,8 @@ export default function Nav() {
             smooth={true}
             offset={-40}
             duration={600}
+            onClick={handleScroll}
+
           >
             O co chodzi?
           </ScrollLink> 
@@ -63,11 +77,11 @@ export default function Nav() {
         <li className='nav-bottom-element'> 
           <ScrollLink 
             className='nav-bottom-element-link'
-            to='/'
+            to='carousel'
             activeClass='active'
             spy={true}
             smooth={true}
-            offset={10}
+            offset={-70}
             duration={600}
             >
                 Fundacja o organizacje
@@ -86,6 +100,7 @@ export default function Nav() {
                   Kontakt
               </ScrollLink> 
             </li>
+          
 
       </ul>
     </div>
