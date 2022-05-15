@@ -4,6 +4,7 @@ import ThreeColumns from './ThreeColumns';
 import Steps from './Steps';
 import About from './About';
 import Carousel from './Carousel';
+import Contact from './Contact';
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
       <Steps/>
       <About/>
       <Carousel/>
+      <Contact/>
     </>
   )
 }
