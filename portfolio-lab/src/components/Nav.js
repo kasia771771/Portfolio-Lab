@@ -90,11 +90,11 @@ const handleScroll = () => {
             <li className='nav-bottom-element'>
               <ScrollLink 
                 className='nav-bottom-element-link'
-                to='/'
+                to='contact'
                 activeClass='active'
                 spy={true}
                 smooth={true}
-                offset={10}
+                offset={30}
                 duration={600}
                 >
                   Kontakt
