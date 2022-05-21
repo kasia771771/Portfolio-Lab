@@ -8,7 +8,16 @@ export default function Contact() {
         message: '',
     });
 
-    const [errors,setErrors] = useState({})
+    const [errors,setErrors] = useState({});
+    const[isSubmit, setIsSubmit] = useState(false);
+
+    const API = 'https://fer-api.coderslab.pl/v1/portfolio/contact';
+            const data = {
+                name: values.name,
+                email: values.email,
+                message: values.message
+            };
+
 
     const handleChange = e => {
         const {name,value} = e.target
@@ -18,9 +27,31 @@ export default function Contact() {
         })
     }
 
+    const sendMessage = e => {
+        if (Object.keys(errors).length === 0 && isSubmit) {
+            
+            fetch(`${API}/cars`, {
+                method: "POST",
+                body: JSON.stringify(data),
+                headers: {
+                "Content-Type": "application/json"
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        }
+    }
+
     const handleSubmit = e => {
         e.preventDefault();
         setErrors(validate(values));
+        setIsSubmit(true);
+        sendMessage();   
     }
 
     const validate = () => {
@@ -56,6 +87,9 @@ export default function Contact() {
             <div className='contact-form container'>
                 <h2 className='contact-title'>Skontaktuj się z nami</h2>
                 <div className='decoration'/>
+                {Object.keys(errors).length === 0 && isSubmit ? (
+                    <p className='success-message'>Wiadomość została wysłana! Wkrótce się skontaktujemy.</p>
+                    ) : (null)}
                 <form className='form-container'onSubmit={handleSubmit}>
                     <div className='default-input-container'>
                         <div className='text-input-container'>
