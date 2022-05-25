@@ -75,8 +75,13 @@
             }
 
             .carousel-comments-section {
+                align-self:center;
                 width:100%;
                 margin-top: 80px;
+                .carousel-single-page-none {
+                    display:none;
+                }
+
                 .carousel-single-comment {
                     width:1200px;
                     display: flex;
@@ -110,23 +115,24 @@
         display: flex;
         gap:40px;
         margin-top:30px;
-        .carousel-page-wrapper{
-            display: flex;
-            align-items:center;
-            justify-content: center;
+        .carousel-page-btn{
+            background-color: transparent;
+            border:0.75px solid transparent;
             width:40px;
             height:50px;
-            border:0.75px solid transparent;
+
         }
 
-        .carousel-page-wrapper-active{
-            display: flex;
-            align-items:center;
-            justify-content: center;
+        .carousel-page-btn-active{
+            background-color: transparent;
             width:40px;
             height:50px;
             border:0.75px solid $color-dark-gray;
 
+        }
+
+        .carousel-page-btn-none {
+            display:none;
         }
     }
 

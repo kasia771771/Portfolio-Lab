@@ -19,38 +19,19 @@
     }
 
     .form-login {
-
         display:flex;
         flex-direction:column;
         align-items:center;
         .inputs-container {
             background-color: $color-form-bg;
-            height: 300px;
-            width:400px;
+            // height: 400px;
+            // width:500px;
+            padding: 30px 90px;
+            padding-top:70px;
             display:flex;
             flex-direction:column;
             align-items:center;
             justify-content:center;
-            .text-input-container{
-                display:flex;
-                flex-direction:column; 
-                max-width:500px;
-                margin-bottom:20px;   
-    
-                .text-input{
-                    color:$color-dark-gray;
-                    width:240px;
-                    margin-top:14px;
-                    background-color:transparent;
-                    border-color:transparent;
-                    border-bottom:0.75px solid $color-dark-gray;                      
-                }
-    
-                .text-input::placeholder{
-                    color:color-placeholder;
-                    font-family: $font-base;
-                }
-            }
         }
         .buttons-container {
             display:flex;
@@ -73,6 +54,7 @@
                 align-items: center;
                 justify-content: center;
             }
+
             .btn-submit {
                 color:$color-dark-gray;
                 background-color:transparent;
@@ -85,9 +67,7 @@
                 align-self: flex-end;
                 margin-top:60px;
             }
+            
         }
     }
-
-
-    
 }

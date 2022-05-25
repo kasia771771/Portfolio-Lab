@@ -57,7 +57,7 @@ export default function Contact() {
     const validate = () => {
 
         let errors = {};
-        const nameRegex = /[a-zA-z]/;
+        const nameRegex = /^[A-Za-z]+$/;
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
 
         if (!values.name.trim()) {
@@ -96,7 +96,7 @@ export default function Contact() {
                             <label className='text-label'>Wpisz swoje imię</label>
                             <input 
                             type='text' 
-                            className='text-input' 
+                            className={errors.name  ? 'error-input': 'text-input'} 
                             name='name' 
                             placeholder='Krzysztof'
                             value={values.name}
@@ -109,7 +109,7 @@ export default function Contact() {
                             <input 
                                 type='text' 
                                 name='email' 
-                                className='text-input'
+                                className={errors.name  ? 'error-input': 'text-input'} 
                                 placeholder='abc@xyz.pl'
                                 value={values.email}
                                 onChange={handleChange}
@@ -123,7 +123,7 @@ export default function Contact() {
                         <textarea  
                             rows='6' 
                             name='message' 
-                            className='textarea-input' 
+                            className={errors.name  ? 'error-textarea': 'textarea-input'} 
                             value={values.message}
                             onChange={handleChange}
                             placeholder='Lorem ipsum dolor sit amet,

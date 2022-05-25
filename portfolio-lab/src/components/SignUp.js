@@ -8,6 +8,51 @@ export default function SignUp() {
     password: '',
     passwordConfirm: '',
 });
+  const [errors,setErrors] = useState({});
+  const[isSubmit, setIsSubmit] = useState(false);
+
+
+  const handleChange = e => {
+    const {name,value} = e.target
+    setValues({
+        ...values,
+        [name]: value
+    })
+}
+  const validate = () => {
+
+  let errors = {};
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+
+  if (!values.email) {
+      errors.email = 'Pole nie może być puste';
+  } else if (!emailRegex.test(values.email)) {
+      errors.email = 'Podany email jest nieprawidłowy!';
+  }
+
+  if (!values.password) {
+      errors.password = 'Pole nie może być puste';
+  } else if (values.password.length < 6) {
+      errors.password = 'Podane hasło jest za krótkie!';
+  }
+
+  if(!values.passwordConfirm) {
+    errors.passwordConfirm = 'Pole nie może być puste';
+  } else if (values.passwordConfirm.length < 6) {
+    errors.passwordConfirm = 'Podane hasło jest za krótkie!';
+  } else if (values.passwordConfirm !== values.password) {
+    errors.passwordConfirm = 'Hasła muszą być takie same';
+  }
+
+  return errors;
+  }
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    setErrors(validate(values));
+    // setIsSubmit(true);
+}
+
 
   return (
     <div className='login-container'>
@@ -15,37 +60,43 @@ export default function SignUp() {
         <h2 className='login-title'>Załóż konto</h2>
         <div className='decoration'/>
     </div>
-      <div className='form-login'>
+      <form className='form-login' onSubmit={handleSubmit}>
         <div className='inputs-container'>
           <div className='text-input-container'>
             <label className='text-label' >Email</label>
             <input 
               type='text' 
               name='email' 
-              className='text-input'
+              className={errors.email  ? 'error-input': 'text-input'} 
               value={values.email}
-              // onChange={handleChange}
+              onChange={handleChange}
             />
+            <p className='error-message'>{errors.email}</p>                       
+
           </div>
           <div className='text-input-container'>
             <label className='text-label' >Hasło</label>
             <input 
-              type='text' 
+              type='password' 
               name='password'  
-              className='text-input'
+              className={errors.password  ? 'error-input': 'text-input'} 
               value={values.password}
-              // onChange={handleChange}
+              onChange={handleChange}
             />
+            <p className='error-message'>{errors.password}</p>                       
+
           </div>
           <div className='text-input-container'>
             <label className='text-label' >Powtórz hasło</label>
             <input 
-              type='text' 
+              type='password' 
               name='passwordConfirm' 
-              className='text-input'
+              className={errors.passwordConfirm  ? 'error-input': 'text-input'} 
               value={values.passwordConfirm}
-              // onChange={handleChange}
+              onChange={handleChange}
             />
+            <p className='error-message'>{errors.passwordConfirm}</p>                        
+
           </div>
         </div>
         <div className='buttons-container'>
@@ -60,7 +111,7 @@ export default function SignUp() {
               Załóż konto
           </button>
         </div>
-      </div>
+      </form>
     </div>
   )
 }

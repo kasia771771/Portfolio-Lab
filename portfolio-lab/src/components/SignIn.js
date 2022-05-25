@@ -28,13 +28,13 @@ export default function SignIn() {
   if (!values.email) {
       errors.email = 'Pole nie może być puste';
   } else if (!emailRegex.test(values.email)) {
-      errors.email = 'Email powinien być poprawny';
+      errors.email = 'Podany email jest nieprawidłowy!';
   }
 
   if (!values.password) {
       errors.password = 'Pole nie może być puste';
   } else if (values.password.length < 6) {
-      errors.password = 'Hasło musi mieć conajmniej 6 znaków';
+      errors.password = 'Podane hasło jest za krótkie!';
   }
 
   return errors;
@@ -59,7 +59,7 @@ export default function SignIn() {
             <input 
               type='text' 
               name='email' 
-              className='text-input'
+              className={errors.email  ? 'error-input': 'text-input'} 
               value={values.email}
               onChange={handleChange}
             />
@@ -71,7 +71,7 @@ export default function SignIn() {
             <input 
               type='password' 
               name='password' 
-              className='text-input'
+              className={errors.password  ? 'error-input': 'text-input'} 
               value={values.password}
               onChange={handleChange}
             />
