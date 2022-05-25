@@ -1,5 +1,7 @@
 import React, {useState} from 'react'
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
+import {createUserWithEmailAndPassword} from 'firebase/auth';
+import {auth} from '../firebase.js';
 
 export default function SignUp() {
 
@@ -10,6 +12,8 @@ export default function SignUp() {
 });
   const [errors,setErrors] = useState({});
   const[isSubmit, setIsSubmit] = useState(false);
+  const navigate = useNavigate();
+
 
 
   const handleChange = e => {
@@ -51,7 +55,24 @@ export default function SignUp() {
     e.preventDefault();
     setErrors(validate(values));
     // setIsSubmit(true);
+    register(navigate('/'));
+  
 }
+
+ const register = () => {
+  createUserWithEmailAndPassword(auth, values.email, values.password)
+  .then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // ..
+  });
+ }
+
 
 
   return (

@@ -1,8 +1,13 @@
 import React from 'react'
 import {Link} from "react-router-dom";
+import {auth} from '../firebase.js';
+
 export const steps = document.getElementById('steps');
 
+
 export default function Steps() {
+    const username = auth.currentUser;
+
     return (
         <div id="steps" className="steps ">
             <h2 className="steps-title">Wystarczą 4 proste kroki</h2>
@@ -35,7 +40,13 @@ export default function Steps() {
                 </div>
             </div>
             </div>
-            <Link to="/logowanie" className="cta-btn">Oddaj rzeczy</Link>
+            {
+                    (username!==null) ? 
+                    <Link className="cta-btn" to='/oddaj-rzeczy'>Oddaj rzeczy</Link>
+                    :
+                    <Link className="cta-btn" to='/logowanie'>Oddaj rzeczy</Link>
+
+                }
         </div>
     )
 }

@@ -1,5 +1,9 @@
 import React, {useState} from 'react';
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
+import { signInWithEmailAndPassword } from "firebase/auth";
+import {auth} from '../firebase.js';
+
+
 
 export default function SignIn() {
 
@@ -8,8 +12,10 @@ export default function SignIn() {
     password: '',
 });
 
+ const username = values.email;
   const [errors,setErrors] = useState({});
   const[isSubmit, setIsSubmit] = useState(false);
+  const navigate = useNavigate();
 
 
   const handleChange = e => {
@@ -44,7 +50,21 @@ export default function SignIn() {
     e.preventDefault();
     setErrors(validate(values));
     // setIsSubmit(true);
+    login(navigate('/'));
 }
+
+  const login = e => {
+    signInWithEmailAndPassword(auth, values.email, values.password)
+    .then((userCredential) => {
+      // Signed in 
+      const user = userCredential.user;
+
+  })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+    })
+  }
 
   return (
     <div className='login-container'>
@@ -76,6 +96,7 @@ export default function SignIn() {
               onChange={handleChange}
             />
             <p className='error-message'>{errors.password}</p>                       
+            {/* <p className='error-message'>{errorMessage}</p>                        */}
 
           </div>
         </div>

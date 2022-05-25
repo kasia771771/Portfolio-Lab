@@ -1,6 +1,10 @@
 import React, {useRef} from 'react'
 import {Link as ScrollLink} from 'react-scroll';
 import {Link, NavLink, useLocation, useNavigate} from 'react-router-dom';
+import {auth} from '../firebase.js';
+import {signOut } from "firebase/auth";
+
+
 
 export default function Nav() {
 
@@ -8,15 +12,36 @@ export default function Nav() {
   const navigate = useNavigate();
 
 
-const handleScroll = () => {
-  if(location.pathname !== '/'){
-    navigate('/');
-  } 
-}
+  const username = auth.currentUser;
+
+
+  const logOut = () => {
+    signOut(auth).then(() => {
+      navigate('wylogowano')
+    }).catch((error) => {
+      // An error happened.
+    });
+  }
+
+  const handleScroll = () => {
+    if(location.pathname !== '/'){
+      navigate('/');
+    } 
+  }
 
   return (
     <div className='nav-wrapper container'>
-      <ul className='nav-top'>
+      {
+        (username!==null) ? 
+          <ul className='nav-top'>
+            <li className='user-name'>{username.email}</li> 
+            <button 
+            className='logout-btn'
+            onClick={logOut}
+            >Wyloguj</button> 
+          </ul>
+          : 
+          <ul className='nav-top'>
         <li className='nav-top-element'>
           <Link 
             className='sign-in-btn'
@@ -34,7 +59,8 @@ const handleScroll = () => {
             Załóż konto
           </Link>
         </li>
-      </ul>
+          </ul>
+      }
       <ul className='nav-bottom'>
         <li>
           <NavLink

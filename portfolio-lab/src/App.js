@@ -5,6 +5,7 @@ import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import Nav from './components/Nav';
 import LogOut from './components/LogOut';
+import GiveAway from './components/GiveAway.js';
 
 export default function App() {
     return (
@@ -15,6 +16,7 @@ export default function App() {
                 <Route path='/logowanie' element={<SignIn/>}/>
                 <Route path='rejestracja' element={<SignUp/>}/>
                 <Route path='wylogowano' element={<LogOut/>}/>
+                <Route path='oddaj-rzeczy' element={<GiveAway/>}/>
             </Routes>
         </BrowserRouter>
     )
