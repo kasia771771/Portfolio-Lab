@@ -1,0 +1,41 @@
+.three-columns {
+  background-image: url("../assets/3-Columns-Background.png");
+  height: 400px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+
+  .three-columns-wrapper {
+    display: flex;
+    gap: 90px;
+    align-content: center;
+    align-items: center;
+    .single-column {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .col-count {
+        font-size: 5.625em;
+        font-weight: 300;
+        margin-bottom: 20px;
+        color: $color-brown;
+      }
+      .col-title {
+        text-transform: uppercase;
+        font-size: 1.125em;
+        font-weight: 300;
+        color: $color-dark-gray;
+        margin-bottom: 20px;
+      }
+      .col-description {
+        text-align: center;
+        max-width: 370px;
+        color: $color-dark-gray;
+        line-height: 1.5em;
+      }
+    }
+  }
+}
